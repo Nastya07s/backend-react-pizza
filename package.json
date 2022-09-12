@@ -1,0 +1,24 @@
+{
+  "name": "backend-react-pizza",
+  "version": "1.0.0",
+  "description": "Node.js backend for React pizza",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nastya07s/backend-react-pizza.git"
+  },
+  "keywords": [
+    "express",
+    "node.js",
+    "mongo"
+  ],
+  "author": "Nastya07s",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nastya07s/backend-react-pizza/issues"
+  },
+  "homepage": "https://github.com/Nastya07s/backend-react-pizza#readme"
+}
