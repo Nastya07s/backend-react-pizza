@@ -40,15 +40,13 @@ function ItemsDto(item) {
 app.get('/items', async (req, res) => {
   const sortObject = {};
 
-  const { sortBy, order, category } = req.query;
+  const { sortBy, order, ...filter } = req.query;
 
   if (sortBy) {
     sortObject[sortBy] = order || 'asc';
   }
 
-  const filterObject = category === '0' || !category ? {} : { category };
-
-  const items = await Item.find(filterObject).sort(sortObject);
+  const items = await Item.find(filter).sort(sortObject);
 
   const resultItems = items.map((item) => ItemsDto(item));
 
