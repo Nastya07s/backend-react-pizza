@@ -46,6 +46,10 @@ app.get('/items', async (req, res) => {
     sortObject[sortBy] = order || 'asc';
   }
 
+  if (filter.title) {
+    filter.title = new RegExp(filter.title, 'i');
+  }
+
   const items = await Item.find(filter).sort(sortObject);
 
   const resultItems = items.map((item) => ItemsDto(item));
