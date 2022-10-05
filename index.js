@@ -40,7 +40,7 @@ function ItemsDto(item) {
 app.get('/items', async (req, res) => {
   const sortObject = {};
 
-  const { sortBy, order, ...filter } = req.query;
+  const { sortBy, order, limit, page, ...filter } = req.query;
 
   if (sortBy) {
     sortObject[sortBy] = order || 'asc';
@@ -52,11 +52,11 @@ app.get('/items', async (req, res) => {
 
   const items = await Item.find(filter).sort(sortObject);
 
-  const resultItems = items.map((item) => ItemsDto(item));
+  const resultItems = [...items].splice(page * limit, limit).map((item) => ItemsDto(item));
 
   res.set('Access-Control-Allow-Origin', '*');
 
-  res.send(resultItems);
+  res.send({ items: resultItems, count: items.length });
 });
 
 app.get('/', (req, res) => {
