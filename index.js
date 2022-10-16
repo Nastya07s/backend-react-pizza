@@ -50,13 +50,17 @@ app.get('/items', async (req, res) => {
     filter.title = new RegExp(filter.title, 'i');
   }
 
-  const items = await Item.find(filter).sort(sortObject);
+  const receivedItems = await Item.find(filter)
+    .skip(page * limit)
+    .limit(limit);
 
-  const resultItems = [...items].splice(page * limit, limit).map((item) => ItemsDto(item));
+  const count = await Item.countDocuments(filter);
+
+  const items = receivedItems.map((item) => ItemsDto(item));
 
   res.set('Access-Control-Allow-Origin', '*');
 
-  res.send({ items: resultItems, count: items.length });
+  res.send({ items, count });
 });
 
 app.get('/', (req, res) => {
