@@ -51,6 +51,7 @@ app.get('/items', async (req, res) => {
   }
 
   const receivedItems = await Item.find(filter)
+    .sort(sortObject)
     .skip(page * limit)
     .limit(limit);
 
